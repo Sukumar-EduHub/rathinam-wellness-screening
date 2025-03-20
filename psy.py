@@ -25,26 +25,6 @@ def interpret_score(score, category):
 st.set_page_config(page_title="Wellness Screening", page_icon="🧘", layout="wide")
 st.title("🌿 Rathinam's AI-Driven Comprehensive Wellness Screening for College Community 🌿")
 
-st.markdown(
-    """
-    <style>
-        .stApp {
-            background-color: #f4f8fb;
-        }
-        .stTitle {
-            color: #2E8B57;
-            text-align: center;
-        }
-        .stButton>button {
-            background-color: #FF6347;
-            color: white;
-            border-radius: 10px;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 categories = {
     "Physical Health": ["How often do you engage in physical exercise?", "How would you rate your sleep quality?", "Do you eat a balanced diet?", "Do you experience chronic pain?", "How often do you get medical checkups?"],
     "Mental & Emotional Well-being": ["How well do you handle stress?", "How often do you feel anxious?", "Do you have a strong sense of purpose?", "Do you feel joy in life?", "How would you describe your self-esteem?"],
@@ -65,10 +45,15 @@ for i, (category, questions) in enumerate(categories.items()):
             response = st.radio(question, list(options.keys()), index=0, key=f"{category}_{question}")
             category_scores.append(options[response])
         responses[category] = calculate_score(category_scores)
+        
+        if st.button(f"Submit {category}", key=f"submit_{category}"):
+            st.write(f"**{category} Score:** {responses[category]} | {interpret_score(responses[category], category)}")
 
-if st.button("🚀 Submit Assessment"):
-    st.subheader("📊 Results")
+if st.button("🚀 Submit Overall Assessment"):
+    overall_score = sum(responses.values())
+    st.subheader("📊 Overall Results")
     for category, score in responses.items():
         st.write(f"**{category}**: Score = {score} | {interpret_score(score, category)}")
+    st.write(f"**Total Overall Score:** {overall_score}")
     
     st.write("**📌 Guidance:** If any domain scores below 9, consider seeking professional help.")
