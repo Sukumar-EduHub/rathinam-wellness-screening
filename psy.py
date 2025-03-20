@@ -69,6 +69,6 @@ for i, (category, questions) in enumerate(categories.items()):
 if st.button("🚀 Submit Assessment"):
     st.subheader("📊 Results")
     for category, score in responses.items():
-        st.write(f"**{category}**: {interpret_score(score, category)}")
+        st.write(f"**{category}**: Score = {score} | {interpret_score(score, category)}")
     
     st.write("**📌 Guidance:** If any domain scores below 9, consider seeking professional help.")
