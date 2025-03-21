@@ -42,9 +42,10 @@ for i, (category, questions) in enumerate(categories.items()):
         st.subheader(f"🎯 {category}")
         category_scores = []
         for question in questions:
-            response = st.radio(question, list(options.keys()), index=0, key=f"{category}_{question}")
-            category_scores.append(options[response])
-        responses[category] = calculate_score(category_scores)
+            response = st.radio(question, list(options.keys()), index=None, key=f"{category}_{question}")
+            if response:
+                category_scores.append(options[response])
+        responses[category] = calculate_score(category_scores) if category_scores else 0
         
         if st.button(f"Submit {category}", key=f"submit_{category}"):
             st.write(f"**{category} Score:** {responses[category]} | {interpret_score(responses[category], category)}")
