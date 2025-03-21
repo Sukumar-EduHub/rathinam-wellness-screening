@@ -33,7 +33,7 @@ categories = {
     "Mental Health 'Red Alert' Screening": ["Have you lost interest in things you used to enjoy?", "Have you experienced thoughts of hopelessness?", "Do you experience excessive worry or panic attacks?", "Have you noticed major changes in sleep patterns?", "Have you had significant weight changes due to stress?"]
 }
 
-options = {"a) 4": 4, "b) 3": 3, "c) 2": 2, "d) 1": 1}
+options = {"a) 1": 1, "b) 2": 2, "c) 3": 3, "d) 4": 4}
 responses = {}
 
 tabs = st.tabs(categories.keys())
